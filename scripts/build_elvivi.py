@@ -110,6 +110,24 @@ V = [
 for old, new in V:
     sub(old, new)
 
+# ---- 2b. CSS for per-account pricing lines -----------------------
+sub("</style>", """.tier-per-account {
+  text-align: center;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 2px;
+}
+.tier-total {
+  text-align: center;
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.7);
+  margin-top: 0.05in;
+}
+.tier-total strong { color: var(--gold); font-weight: 800; }
+</style>""")
+
 # ---- 3. "LO QUE ESCUCHAMOS" — their actual words ------------------
 sub('queremos que sepas que escuchamos con atención.', 'queremos que sepan que escuchamos con atención.')
 sub('Esto es lo que nos compartiste sobre', 'Esto es lo que nos compartieron sobre')
@@ -144,6 +162,8 @@ def card(name, tagline, price, reels, monthly, rec):
         </div>
         <div class="tier-body">
           <div class="tier-price">${int(price):,}<span class="per">/mes</span></div>
+          <div class="tier-per-account">por laboratorio</div>
+          <div class="tier-total">Los dos: <strong>${int(price)*2:,}/mes</strong></div>
           <div class="tier-divider"></div>
           <ul class="tier-features">
             <li><strong>{reels}</strong></li>
@@ -178,8 +198,8 @@ region('    <div class="tiers-grid">', '<!-- ===================================
     <!-- TWO ACCOUNTS + NO SETUP FEE -->
     <div style="margin-top: 0.18in; background: rgba(255,191,0,0.07); border: 1px solid rgba(255,191,0,0.25); border-radius: 8px; padding: 0.18in 0.25in; display: flex; justify-content: space-between; align-items: center;">
       <div>
-        <div style="font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 4px;">Dos cuentas · Un solo precio</div>
-        <div style="font-size: 9.5pt; color: rgba(255,255,255,0.7); line-height: 1.5;">Todos los precios cubren <strong style="color:#fff;">El Vivi y Arecibo Lab</strong> — contenido, estrategia y publicación independientes para cada laboratorio. Meta Ads incluido en todos los planes.</div>
+        <div style="font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 4px;">El precio es por laboratorio</div>
+        <div style="font-size: 9.5pt; color: rgba(255,255,255,0.7); line-height: 1.5;">Cada laboratorio se factura por separado a la tarifa de su plan. <strong style="color:#fff;">El Vivi y Arecibo Lab</strong> reciben contenido, estrategia y publicación independientes — no se comparte ni se recicla contenido entre cuentas. Meta Ads incluido en los tres planes.</div>
       </div>
       <div style="text-align: center; flex-shrink: 0; margin-left: 0.25in;">
         <div style="font-size: 22pt; font-weight: 900; color: var(--gold); line-height: 1;">$0</div>
