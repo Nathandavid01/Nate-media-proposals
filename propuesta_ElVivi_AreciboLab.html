@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Nate Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   NATE MEDIA — PROPOSAL TEMPLATE
+   To customize: update the variables in the CONFIG section
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #ffbf00;
+  --black: #000000;
+  --dark: #111111;
+  --white: #ffffff;
+  --red: #cc0000;
+  --gray: #555555;
+  --light: #f7f7f7;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #cccccc;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ===== PAGE SETUP ===== */
+.page {
+  width: 8.5in;
+  min-height: 11in;
+  background: white;
+  margin: 0.4in auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+@page { size: letter portrait; margin: 0; }
+
+@media print {
+  body { background: white; }
+  .page {
+    margin: 0 !important;
+    box-shadow: none;
+    page-break-after: always;
+    page-break-inside: avoid;
+    width: 100%;
+    min-height: 100vh;
+  }
+  .no-print { display: none !important; }
+}
+
+/* ===== SHARED HEADER (non-cover pages) ===== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.18in 0.55in;
+  border-bottom: 2px solid var(--gold);
+  background: white;
+  flex-shrink: 0;
+}
+.page-header img { height: 32px; width: auto; }
+.page-header .header-client {
+  font-size: 7.5pt;
+  font-weight: 600;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* ===== SHARED FOOTER ===== */
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.1in 0.55in;
+  border-top: 1px solid #eeeeee;
+  flex-shrink: 0;
+}
+.footer-brand { font-size: 7pt; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+.footer-confidential { font-size: 7pt; color: #cccccc; text-transform: uppercase; letter-spacing: 1px; }
+
+/* ===== CONTENT WRAPPER ===== */
+.page-content {
+  padding: 0.45in 0.6in 0.3in;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.section-label {
+  font-size: 7.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-bottom: 0.12in;
+}
+h2.page-title {
+  font-size: 24pt;
+  font-weight: 900;
+  color: var(--black);
+  line-height: 1.15;
+  margin-bottom: 0.08in;
+}
+h2.page-title .red { color: var(--red); }
+h2.page-title .gold { color: var(--gold); }
+.gold-bar { width: 50px; height: 3px; background: var(--gold); margin: 0.15in 0; }
+.body-text {
+  font-size: 10pt;
+  line-height: 1.75;
+  color: #333333;
+  margin-bottom: 0.12in;
+}
+.body-text strong { font-weight: 700; color: var(--black); }
+.divider { width: 100%; height: 1px; background: #eeeeee; margin: 0.18in 0; }
+
+/* ===== DARK PAGE ===== */
+.dark-page { background: var(--black); }
+.dark-page .page-content { color: white; }
+.dark-page h2.page-title { color: white; }
+.dark-page .body-text { color: rgba(255,255,255,0.75); }
+.dark-page .section-label { color: var(--gold); }
+.dark-page .divider { background: rgba(255,255,255,0.1); }
+.dark-page .page-footer { border-top: 1px solid rgba(255,255,255,0.1); }
+.dark-page .footer-confidential { color: rgba(255,255,255,0.2); }
+
+/* ===== CHECKLIST ===== */
+.checklist { list-style: none; margin: 0.1in 0; }
+.checklist li {
+  font-size: 10pt;
+  line-height: 1.5;
+  color: #333;
+  padding: 0.07in 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.12in;
+}
+.checklist li .icon { font-size: 11pt; flex-shrink: 0; margin-top: 1px; }
+.checklist li strong { font-weight: 700; color: var(--black); }
+
+/* ===== COVER PAGE ===== */
+.cover {
+  background: var(--black);
+  color: white;
+  min-height: 11in;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1in 1.2in;
+  position: relative;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--gold);
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--gold);
+}
+.cover-logo { width: 210px; height: auto; margin-bottom: 0.45in; }
+.cover-line { width: 70px; height: 3px; background: var(--gold); margin: 0 auto 0.25in; }
+.cover-type {
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.12in;
+}
+.cover h1 {
+  font-size: 26pt;
+  font-weight: 900;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 0.5in;
+}
+.cover-separator {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,191,0,0.25);
+  margin: 0 auto 0.35in;
+  max-width: 4in;
+}
+.cover-to-label {
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.08in;
+}
+.cover-client {
+  font-size: 20pt;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.06in;
+}
+.cover-business {
+  font-size: 11pt;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 0.4in;
+}
+.cover-from {
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.06in;
+}
+.cover-from-name {
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 0.08in;
+}
+.cover-date {
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ===== HOOK PAGE ===== */
+.hook-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0.3in 0.5in;
+}
+.hook-quote {
+  font-size: 22pt;
+  font-weight: 900;
+  color: var(--black);
+  line-height: 1.3;
+  max-width: 6.2in;
+  margin-bottom: 0.3in;
+}
+.hook-quote .gold { color: var(--gold); }
+.hook-line { width: 60px; height: 3px; background: var(--gold); margin: 0 auto 0.25in; }
+.hook-sub {
+  font-size: 10.5pt;
+  font-weight: 500;
+  color: var(--gray);
+  max-width: 5.5in;
+  line-height: 1.7;
+}
+.hook-sub strong { color: var(--black); font-weight: 700; }
+
+/* ===== STAT HIGHLIGHT ===== */
+.stat-highlight {
+  background: var(--light);
+  border-left: 4px solid var(--gold);
+  padding: 0.15in 0.25in;
+  border-radius: 0 6px 6px 0;
+  margin: 0.15in 0;
+  display: inline-block;
+}
+.stat-highlight .stat-num {
+  font-size: 22pt;
+  font-weight: 900;
+  color: var(--black);
+  line-height: 1;
+}
+.stat-highlight .stat-desc {
+  font-size: 9pt;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+/* ===== MAGIC PAGE ===== */
+.magic-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.2in;
+  margin-bottom: 0.3in;
+}
+.magic-tag {
+  font-size: 8pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  background: rgba(255,191,0,0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,191,0,0.3);
+}
+.magic-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.2in;
+  margin: 0.25in 0;
+}
+.magic-stat-box {
+  text-align: center;
+  padding: 0.3in 0.15in;
+  border: 1px solid rgba(255,191,0,0.2);
+  border-radius: 8px;
+  background: rgba(255,191,0,0.04);
+}
+.magic-stat-num {
+  font-size: 26pt;
+  font-weight: 900;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.06in;
+}
+.magic-stat-label {
+  font-size: 8pt;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+.magic-closing {
+  font-size: 10pt;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  margin-top: 0.15in;
+  font-style: italic;
+}
+.magic-closing strong { color: white; font-style: normal; }
+
+/* ===== CASE STUDY ===== */
+.case-study { display: none; }
+.case-study.active { display: block; }
+
+.case-card {
+  background: var(--dark);
+  border-radius: 10px;
+  padding: 0.4in;
+  border-left: 4px solid var(--gold);
+  margin: 0.15in 0;
+}
+.case-tag {
+  font-size: 7.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 0.08in;
+}
+.case-name {
+  font-size: 15pt;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.03in;
+}
+.case-location {
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.18in;
+}
+.case-big-stat {
+  font-size: 40pt;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.04in;
+}
+.case-big-label {
+  font-size: 9.5pt;
+  color: rgba(255,255,255,0.65);
+  font-weight: 500;
+  margin-bottom: 0.18in;
+}
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.12in;
+  margin-bottom: 0.15in;
+}
+.case-metric {
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 0.1in 0.12in;
+  text-align: center;
+}
+.case-metric-num {
+  font-size: 12pt;
+  font-weight: 800;
+  color: white;
+  display: block;
+  line-height: 1.2;
+}
+.case-metric-label {
+  font-size: 7pt;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.case-strategy {
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.4);
+  font-style: italic;
+  padding-top: 0.12in;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.case-quote-box {
+  background: rgba(255,191,0,0.07);
+  border-radius: 6px;
+  padding: 0.12in 0.18in;
+  margin-top: 0.12in;
+  font-size: 9.5pt;
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,191,0,0.15);
+}
+
+/* Multiple case studies on one page */
+.case-mini {
+  background: var(--dark);
+  border-radius: 8px;
+  padding: 0.2in 0.25in;
+  border-left: 3px solid var(--gold);
+}
+.case-mini-tag {
+  font-size: 7pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  margin-bottom: 0.04in;
+}
+.case-mini-name {
+  font-size: 10.5pt;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.06in;
+}
+.case-mini-stat {
+  font-size: 16pt;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.case-mini-desc {
+  font-size: 8pt;
+  color: rgba(255,255,255,0.5);
+  margin-top: 0.04in;
+}
+.cases-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.15in;
+  margin: 0.15in 0;
+}
+.cases-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.12in;
+  margin: 0.15in 0;
+}
+
+/* ===== PROCESS ===== */
+.process-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1in;
+  margin: 0.1in 0;
+}
+.process-item {
+  display: flex;
+  gap: 0.18in;
+  align-items: flex-start;
+  padding: 0.12in 0.18in;
+  background: var(--light);
+  border-radius: 0 6px 6px 0;
+  border-left: 3px solid var(--gold);
+}
+.process-num {
+  font-size: 16pt;
+  font-weight: 900;
+  color: var(--gold);
+  flex-shrink: 0;
+  line-height: 1;
+  width: 0.3in;
+  text-align: center;
+  margin-top: 1px;
+}
+.process-item h3 {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 2px;
+}
+.process-item p {
+  font-size: 8.5pt;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+/* ===== SERVICES ===== */
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.06in 0.35in;
+  margin: 0.15in 0;
+}
+.service-item {
+  font-size: 9.5pt;
+  color: #333;
+  padding: 0.07in 0;
+  display: flex;
+  align-items: center;
+  gap: 0.1in;
+  border-bottom: 1px solid #f0f0f0;
+}
+.service-item::before { content: '●'; color: var(--gold); font-size: 5pt; flex-shrink: 0; }
+.services-note {
+  font-size: 9pt;
+  color: var(--gray);
+  font-style: italic;
+  text-align: center;
+  margin-top: 0.1in;
+  padding: 0.12in;
+  background: var(--light);
+  border-radius: 6px;
+}
+.services-note strong { color: var(--black); font-style: normal; font-weight: 700; }
+
+/* ===== TIERS ===== */
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.18in;
+  margin: 0.2in 0;
+}
+.tier-card {
+  background: #111111;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.tier-card.recommended { border: 2px solid var(--gold); }
+.tier-header {
+  background: #222222;
+  padding: 0.15in 0.2in;
+  text-align: center;
+  border-bottom: 2px solid var(--gold);
+}
+.tier-card.recommended .tier-header { background: var(--gold); }
+.tier-name {
+  font-size: 10.5pt;
+  font-weight: 900;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: block;
+}
+.tier-card.recommended .tier-name { color: var(--black); }
+.tier-tagline {
+  font-size: 7pt;
+  color: rgba(255,255,255,0.5);
+  margin-top: 2px;
+  display: block;
+}
+.tier-card.recommended .tier-tagline { color: rgba(0,0,0,0.55); }
+.tier-body { padding: 0.2in; flex: 1; display: flex; flex-direction: column; }
+.tier-price {
+  font-size: 28pt;
+  font-weight: 900;
+  color: var(--gold);
+  text-align: center;
+  line-height: 1;
+  margin: 0.1in 0 0.04in;
+}
+.tier-price .per { font-size: 9pt; font-weight: 500; color: rgba(255,255,255,0.4); }
+.tier-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 0.1in 0; }
+.tier-features { list-style: none; flex: 1; }
+.tier-features li {
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.75);
+  padding: 0.05in 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.08in;
+  line-height: 1.4;
+}
+.tier-features li::before { content: '✓'; color: var(--gold); font-weight: 800; flex-shrink: 0; }
+.tier-commitment {
+  font-size: 7.5pt;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  margin-top: 0.12in;
+  padding-top: 0.1in;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.tier-recommended-badge {
+  background: var(--gold);
+  color: var(--black);
+  font-size: 7pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 4px;
+}
+
+/* ===== META ADS ADD-ON ===== */
+.addon-box {
+  display: flex;
+  gap: 0.3in;
+  align-items: center;
+  background: #111111;
+  border-radius: 10px;
+  padding: 0.3in;
+  border: 1px solid rgba(255,191,0,0.25);
+  margin: 0.15in 0;
+}
+.addon-price-circle {
+  flex-shrink: 0;
+  text-align: center;
+  background: rgba(255,191,0,0.08);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  width: 1.3in;
+  height: 1.3in;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.addon-price-num { font-size: 20pt; font-weight: 900; color: var(--gold); line-height: 1; }
+.addon-price-label { font-size: 7pt; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
+.addon-text h3 { font-size: 12pt; font-weight: 800; color: white; margin-bottom: 0.07in; }
+.addon-text p { font-size: 9pt; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+/* ===== ROI ===== */
+.roi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.2in;
+  margin: 0.2in 0;
+}
+.roi-card {
+  text-align: center;
+  padding: 0.28in 0.15in;
+  background: var(--light);
+  border-radius: 8px;
+  border-top: 3px solid var(--gold);
+}
+.roi-stat { font-size: 19pt; font-weight: 900; color: var(--black); display: block; line-height: 1.1; margin-bottom: 0.04in; }
+.roi-client { font-size: 7.5pt; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.05in; display: block; }
+.roi-desc { font-size: 8.5pt; color: var(--gray); line-height: 1.4; }
+.roi-conclusion {
+  background: var(--black);
+  color: white;
+  border-radius: 8px;
+  padding: 0.2in 0.3in;
+  text-align: center;
+  margin-top: 0.15in;
+}
+.roi-conclusion p { font-size: 10pt; line-height: 1.6; color: rgba(255,255,255,0.8); }
+.roi-conclusion strong { color: var(--gold); }
+
+/* ===== CTA PAGE ===== */
+.cta-steps { list-style: none; margin: 0.2in 0; display: flex; flex-direction: column; gap: 0.1in; }
+.cta-step { display: flex; align-items: center; gap: 0.15in; }
+.cta-num {
+  width: 30px; height: 30px;
+  background: var(--gold);
+  color: var(--black);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9.5pt; font-weight: 900;
+  flex-shrink: 0;
+}
+.cta-step p { font-size: 10pt; color: rgba(255,255,255,0.8); line-height: 1.4; }
+.cta-step p strong { color: white; font-weight: 700; }
+.contact-block { margin-top: 0.3in; padding-top: 0.25in; border-top: 1px solid rgba(255,255,255,0.12); }
+.contact-sign-off { font-size: 10pt; color: rgba(255,255,255,0.5); margin-bottom: 0.08in; font-style: italic; }
+.contact-name { font-size: 15pt; font-weight: 900; color: white; margin-bottom: 0.04in; }
+.contact-title { font-size: 8pt; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 0.18in; }
+.contact-row { display: flex; gap: 0.4in; align-items: flex-start; }
+.contact-item span { font-size: 7pt; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 2px; }
+.contact-item p { font-size: 10.5pt; font-weight: 700; color: white; }
+
+/* ===== TEAM PAGE ===== */
+.team-full-photo {
+  width: 100%;
+  height: 3.2in;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 8px;
+  margin: 0.12in 0;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.18in;
+  margin: 0.15in 0;
+}
+.team-member { text-align: center; }
+.team-member-photo {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 8px;
+  margin-bottom: 0.08in;
+  display: block;
+}
+.team-member-name {
+  font-size: 9pt;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 2px;
+}
+.team-member-title {
+  font-size: 7.5pt;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== LO QUE ESCUCHAMOS DE TI ===== */
+.heard-page { background: #fff; }
+.heard-intro {
+  font-size: 10pt;
+  color: #555;
+  margin-bottom: 0.2in;
+  line-height: 1.6;
+}
+.heard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.13in;
+}
+.heard-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.12in;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: 0.12in 0.15in;
+  font-size: 9.5pt;
+  color: #222;
+  line-height: 1.5;
+}
+.heard-list li .heard-icon {
+  font-size: 13pt;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.heard-promise {
+  margin-top: 0.2in;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.15in 0.2in;
+  font-size: 9.5pt;
+  line-height: 1.6;
+}
+.heard-promise strong { color: var(--gold); }
+
+/* ===== CUSTOM PAIN POINTS ===== */
+.pain-box {
+  background: rgba(204,0,0,0.06);
+  border-left: 4px solid var(--red);
+  border-radius: 0 6px 6px 0;
+  padding: 0.15in 0.2in;
+  margin: 0.15in 0;
+}
+.pain-box p { font-size: 9.5pt; color: #333; line-height: 1.6; }
+.pain-box p strong { color: var(--red); }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+  PROPUESTA — El Vivi & Arecibo Lab
+  Heriberto Morales & Kareni Pérez · Arecibo y Utuado
+  Generada desde propuesta.html — no editar a mano;
+  regenerar con scripts/build_elvivi.py
+  ============================================================ -->
+
+
+<!-- ============================================================
+  PAGE 1: COVER
+  ============================================================ -->
+<div class="page cover">
+  <img src="logo.jpg" alt="Nate Media" class="cover-logo">
+  <div class="cover-line"></div>
+  <div class="cover-type">Propuesta Estratégica de Marketing Digital</div>
+  <h1>Más visibilidad.<br>Más clientes.<br>Resultados reales.</h1>
+  <div class="cover-separator"></div>
+  <div class="cover-to-label">Preparada para</div>
+  <div class="cover-client">Heriberto Morales &amp; Kareni Pérez</div>
+  <div class="cover-business">Laboratorios Clínicos El Vivi &amp; Arecibo Lab<br>Arecibo y Utuado, Puerto Rico</div>
+  <div class="cover-from">De parte de</div>
+  <div class="cover-from-name">Nathan D. Torres Soto — MBA, CEO &amp; Founder</div>
+  <div class="cover-date">29 de agosto de 2026</div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 2: HOOK
+  ============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="hook-inner">
+      <div class="hook-quote">
+        "La mayoría de agencias les venden <span class="gold">posts.</span><br>
+        Nosotros les vendemos <span class="gold">pacientes nuevos.</span>"
+      </div>
+      <div class="hook-line"></div>
+      <p class="hook-sub">
+        El equipo de contenido digital detrás de <strong>Magic 97.3 FM</strong>, <strong>Restauco</strong>, <strong>Casita Vieja</strong> y más de <strong>40 marcas</strong> en Puerto Rico.<br><br>
+        Hemos generado <strong>más de 20 millones de vistas orgánicas</strong> para negocios como los de ustedes — sin depender de publicidad pagada.
+      </p>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 3: LO QUE ESCUCHAMOS DE TI
+  ============================================================ -->
+<div class="page heard-page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">Personalizado para ustedes</div>
+    <h2 class="page-title">Lo que escuchamos<br><span class="gold">de ustedes.</span></h2>
+    <div class="gold-bar"></div>
+    <p class="heard-intro">
+      Antes de presentarles nuestra propuesta, queremos que sepan que escuchamos con atención.<br>
+      Esto es lo que nos compartieron sobre <strong>El Vivi &amp; Arecibo Lab</strong>:
+    </p>
+    <ul class="heard-list">
+      <li><span class="heard-icon">🎯</span><span>No tienen visibilidad digital — la gente de <strong>Arecibo y Utuado</strong> no sabe que ustedes existen ni qué servicios ofrecen.</span></li>
+      <li><span class="heard-icon">⚔️</span><span>Compiten en un mercado saturado — <strong>muchos laboratorios clínicos</strong> en la misma región peleando por el mismo paciente.</span></li>
+      <li><span class="heard-icon">🏥</span><span>Son <strong>dos laboratorios con dos audiencias distintas</strong> — El Vivi y Arecibo Lab necesitan presencia propia, no un mensaje genérico.</span></li>
+      <li><span class="heard-icon">⚡</span><span>Quieren resultados medibles — pacientes entrando por la puerta diciendo <em>"los vi en redes"</em>, no solo likes.</span></li>
+    </ul>
+    <div class="heard-promise">
+      Esta propuesta fue diseñada específicamente para <strong>El Vivi &amp; Arecibo Lab</strong>.<br>
+      Cada número, cada caso de estudio, cada estrategia — <strong>pensada para laboratorios clínicos en su región.</strong>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 4: THE PROBLEM
+  ============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">El Problema</div>
+    <h2 class="page-title"><span class="red">Nadie los ve.</span><br>Nadie los visita.</h2>
+    <div class="gold-bar"></div>
+    <p class="body-text">
+      El <strong>83.4% de los puertorriqueños</strong> usa redes sociales todos los días. Su paciente ideal está ahí — desplazándose por su feed, buscando exactamente lo que ustedes ofrecen.
+    </p>
+    <p class="body-text">
+      Si no los ven a ustedes, van a ver a su competencia. Y una vez que un paciente se vuelve leal a otro laboratorio, ya lo perdieron.
+    </p>
+
+    <div class="stat-highlight" style="margin: 0.15in 0;">
+      <div class="stat-num">83.4%</div>
+      <div class="stat-desc">de los puertorriqueños usa redes sociales diariamente</div>
+    </div>
+
+    <!-- CUSTOM PAIN POINT — update per client -->
+    <div class="pain-box">
+      <p>Hoy, cuando alguien en Arecibo o Utuado necesita hacerse un laboratorio, <strong>no piensa en El Vivi ni en Arecibo Lab</strong> — porque no los ve en ningún lado. Mientras tanto, la competencia en la región sí está frente a ese paciente todos los días.</p>
+    </div>
+
+    <p class="body-text">
+      <strong>No tener una presencia digital sólida en 2026 no es una opción.</strong> Es pérdida de dinero directa para sus laboratorios.
+    </p>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 4: THE ENEMY
+  ============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">La Realidad</div>
+    <h2 class="page-title">El problema<br><span class="red">no son ustedes.</span></h2>
+    <div class="gold-bar"></div>
+    <p class="body-text">La mayoría de dueños de negocio ya han intentado el marketing digital. Y casi todos tienen la misma historia:</p>
+
+    <ul class="checklist" style="margin: 0.15in 0;">
+      <li><span class="icon">❌</span><span>Contrataron una agencia — y <strong>no vieron resultados</strong></span></li>
+      <li><span class="icon">❌</span><span>Les vendieron "paquetes de posts" — <strong>sin estrategia real</strong></span></li>
+      <li><span class="icon">❌</span><span>Nadie les contestaba el teléfono ni respondía sus preguntas</span></li>
+      <li><span class="icon">❌</span><span>Recibieron gráficas bonitas — pero <strong>ningún cliente nuevo</strong></span></li>
+      <li><span class="icon">❌</span><span>Gastaron dinero y terminaron igual o peor que antes</span></li>
+    </ul>
+
+    <div class="divider"></div>
+    <p class="body-text" style="font-size: 11pt; font-weight: 700; color: var(--black); text-align: center; padding: 0.1in 0;">
+      La mayoría de agencias venden contenido.<br>
+      <span style="color: var(--gold);">Nosotros vendemos resultados.</span>
+    </p>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 5: WHY NATE MEDIA
+  ============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">Por Qué Nate Media</div>
+    <h2 class="page-title">Lo que nos hace<br><span class="gold">diferentes.</span></h2>
+    <div class="gold-bar"></div>
+
+    <ul class="checklist">
+      <li><span class="icon">✅</span><span><strong>Volumen real</strong> — Mientras la competencia produce 2-4 videos al mes, nosotros producimos 2-4 por semana</span></li>
+      <li><span class="icon">✅</span><span><strong>Comunicación directa</strong> — Tienen acceso a Nathan y su equipo, siempre. Sin intermediarios.</span></li>
+      <li><span class="icon">✅</span><span><strong>Resultados en 30 días</strong> — No en 6 meses. Verán movimiento desde el primer mes.</span></li>
+      <li><span class="icon">✅</span><span><strong>+40 clientes, 11 industrias</strong> — Con números reales, no promesas</span></li>
+      <li><span class="icon">✅</span><span><strong>Vamos a ustedes</strong> — Grabamos en Arecibo y en Utuado. Ustedes no tienen que ir a ningún lado.</span></li>
+      <li><span class="icon">✅</span><span><strong>Orgánico primero</strong> — Probamos el contenido antes de invertir en publicidad pagada. Cada dólar cuenta.</span></li>
+      <li><span class="icon">✅</span><span><strong>Ustedes solo aparecen</strong> — Nosotros hacemos todo lo demás: ideas, guiones, grabación, edición, publicación.</span></li>
+    </ul>
+
+    <div class="divider"></div>
+    <p class="body-text" style="text-align: center; font-weight: 600;">
+      No somos una agencia más. <span style="color: var(--gold); font-weight: 800;">Somos su equipo de marketing.</span>
+    </p>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 6: MEET THE TEAM
+  ============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">El Equipo</div>
+    <h2 class="page-title">Las personas detrás<br><span class="gold">de su crecimiento.</span></h2>
+    <div class="gold-bar"></div>
+
+    <img src="team.jpeg" alt="Nate Media Team" class="team-full-photo">
+
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="nathan.jpeg" alt="Nathan Torres" class="team-member-photo">
+        <div class="team-member-name">Nathan Torres</div>
+        <div class="team-member-title">CEO &amp; Founder</div>
+      </div>
+      <div class="team-member">
+        <img src="alondra.jpeg" alt="Alondra Rodriguez" class="team-member-photo">
+        <div class="team-member-name">Alondra Rodríguez</div>
+        <div class="team-member-title">Production Manager</div>
+      </div>
+      <div class="team-member">
+        <img src="anibeliz.jpeg" alt="Anibeliz Fuentes" class="team-member-photo">
+        <div class="team-member-name">Anibeliz Fuentes</div>
+        <div class="team-member-title">Copywriting</div>
+      </div>
+      <div class="team-member">
+        <img src="denisha.jpeg" alt="Denisha Matos" class="team-member-photo">
+        <div class="team-member-name">Denisha Matos</div>
+        <div class="team-member-title">Social Media Manager</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 6: MAGIC 97.3 FM (FLAGSHIP)
+  ============================================================ -->
+<div class="page dark-page">
+  <div class="page-header" style="background: #111; border-bottom-color: var(--gold);">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client" style="color: rgba(255,255,255,0.3);">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">Nuestro Cliente Insignia</div>
+    <div class="magic-logo-row">
+      <h2 class="page-title" style="margin-bottom: 0;">Magic 97.3 FM</h2>
+      <span class="magic-tag">La Radio #1 de Puerto Rico</span>
+    </div>
+    <div class="gold-bar"></div>
+    <p class="body-text">El equipo de Nate Media maneja el contenido digital de la estación de radio más importante de Puerto Rico. Estos son los resultados del primer trimestre de 2026:</p>
+
+    <div class="magic-stats">
+      <div class="magic-stat-box">
+        <span class="magic-stat-num">~10M</span>
+        <span class="magic-stat-label">Vistas Totales<br>Q1 2026</span>
+      </div>
+      <div class="magic-stat-box">
+        <span class="magic-stat-num">6.6M</span>
+        <span class="magic-stat-label">Personas<br>Alcanzadas</span>
+      </div>
+      <div class="magic-stat-box">
+        <span class="magic-stat-num">424K</span>
+        <span class="magic-stat-label">Seguidores<br>en Facebook</span>
+      </div>
+    </div>
+
+    <p class="magic-closing">
+      <strong>El mismo equipo. La misma dedicación. Disponible para ambos laboratorios.</strong>
+    </p>
+  </div>
+  <div class="page-footer" style="border-top-color: rgba(255,255,255,0.1);">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential" style="color: rgba(255,255,255,0.2);">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 7: CASE STUDY (Industry-specific)
+  Show only ONE — add class "active" to the relevant industry
+  ============================================================ -->
+<div class="page dark-page">
+  <div class="page-header" style="background: #111; border-bottom-color: var(--gold);">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client" style="color: rgba(255,255,255,0.3);">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">Caso de Éxito — Salud</div>
+    <h2 class="page-title">Resultados reales.<br><span class="gold">Un negocio como el de ustedes.</span></h2>
+    <div class="gold-bar"></div>
+
+    <!-- AUTOMOTIVE -->
+    <div class="case-study" id="cs-automotive">
+      <div class="case-card">
+        <div class="case-tag">Taller Automotriz</div>
+        <div class="case-name">Restauco</div>
+        <div class="case-location">San Juan, Puerto Rico</div>
+        <div class="case-big-stat">2,100,000</div>
+        <div class="case-big-label">Vistas — Primeros 31 días — Solo contenido orgánico</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">+47,781%</span><span class="case-metric-label">Crecimiento en alcance</span></div>
+          <div class="case-metric"><span class="case-metric-num">12,100</span><span class="case-metric-label">Nuevos seguidores</span></div>
+          <div class="case-metric"><span class="case-metric-num">27,400</span><span class="case-metric-label">Interacciones</span></div>
+        </div>
+        <div class="case-strategy">Estrategia: Propietario en cámara mostrando el taller y su expertise — contenido auténtico que genera confianza</div>
+      </div>
+    </div>
+
+    <!-- RESTAURANT -->
+    <div class="case-study" id="cs-restaurant">
+      <div class="case-card">
+        <div class="case-tag">Restaurante</div>
+        <div class="case-name">Casita Vieja</div>
+        <div class="case-location">Caguas, Puerto Rico</div>
+        <div class="case-big-stat">1,200,000</div>
+        <div class="case-big-label">Vistas — Facebook + Instagram — Orgánico</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">96</span><span class="case-metric-label">Mensajes directos (leads)</span></div>
+          <div class="case-metric"><span class="case-metric-num">10,000</span><span class="case-metric-label">Nuevos seguidores</span></div>
+          <div class="case-metric"><span class="case-metric-num">38,300</span><span class="case-metric-label">Interacciones</span></div>
+        </div>
+        <div class="case-strategy">Estrategia: Cocina auténtica + dueño en cámara — contenido que conecta emocionalmente con los clientes</div>
+      </div>
+    </div>
+
+    <!-- FOOD -->
+    <div class="case-study" id="cs-food">
+      <div class="case-card">
+        <div class="case-tag">Food &amp; Beverage</div>
+        <div class="case-name">El Truco de Güin</div>
+        <div class="case-location">Hatillo, Puerto Rico</div>
+        <div class="case-big-stat">1,800,000</div>
+        <div class="case-big-label">Vistas — Primer Trimestre — Facebook</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">+2,600%</span><span class="case-metric-label">Crecimiento seguidores</span></div>
+          <div class="case-metric"><span class="case-metric-num">28,100</span><span class="case-metric-label">Interacciones (+1,400%)</span></div>
+          <div class="case-metric"><span class="case-metric-num">278</span><span class="case-metric-label">Mensajes directos</span></div>
+        </div>
+        <div class="case-strategy">Estrategia: Volumen + consistencia + dueño mostrando la pasión detrás del producto</div>
+      </div>
+    </div>
+
+    <!-- REAL ESTATE -->
+    <div class="case-study" id="cs-realestate">
+      <div class="case-card">
+        <div class="case-tag">Bienes Raíces</div>
+        <div class="case-name">AA Real Estate</div>
+        <div class="case-location">Puerto Rico</div>
+        <div class="case-big-stat">$0</div>
+        <div class="case-big-label">En publicidad pagada — Apartamento rentado en el primer mes</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">+595%</span><span class="case-metric-label">Vistas Facebook</span></div>
+          <div class="case-metric"><span class="case-metric-num">>999%</span><span class="case-metric-label">Crecimiento TikTok</span></div>
+          <div class="case-metric"><span class="case-metric-num">1 mes</span><span class="case-metric-label">Primera propiedad rentada</span></div>
+        </div>
+        <div class="case-strategy">Estrategia: Tours de propiedades en video — TikTok y Facebook desde cero</div>
+      </div>
+    </div>
+
+    <!-- AIRBNB -->
+    <div class="case-study" id="cs-airbnb">
+      <div class="case-card">
+        <div class="case-tag">Airbnb / Turismo</div>
+        <div class="case-name">VSS Properties</div>
+        <div class="case-location">Arecibo, Puerto Rico</div>
+        <div class="case-big-stat">+15-20%</div>
+        <div class="case-big-label">Incremento en margen de ganancias — Anual</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">Directo</span><span class="case-metric-label">Reservas sin plataformas</span></div>
+          <div class="case-metric"><span class="case-metric-num">Surf</span><span class="case-metric-label">Autoridad en turismo deportivo</span></div>
+          <div class="case-metric"><span class="case-metric-num">Anual</span><span class="case-metric-label">Impacto en margen real</span></div>
+        </div>
+        <div class="case-quote-box">"El tráfico de redes facilitó la migración hacia las reservas directas, lo que impacta directamente nuestro margen de ganancias." — CEO, VSS Properties</div>
+      </div>
+    </div>
+
+    <!-- RETAIL SPORTS -->
+    <div class="case-study" id="cs-retail">
+      <div class="case-card">
+        <div class="case-tag">Tienda Deportiva</div>
+        <div class="case-name">Rp Sports</div>
+        <div class="case-location">Puerto Rico</div>
+        <div class="case-big-stat">+35%</div>
+        <div class="case-big-label">En ventas — Tienda especializada en Voleibol</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">5x</span><span class="case-metric-label">Alcance en redes</span></div>
+          <div class="case-metric"><span class="case-metric-num">Orgánico</span><span class="case-metric-label">+ Meta Ads</span></div>
+          <div class="case-metric"><span class="case-metric-num">Cliente ideal</span><span class="case-metric-label">Alcanzado</span></div>
+        </div>
+        <div class="case-strategy">Estrategia: De fotos de productos a contenido auténtico + Meta Ads sobre orgánico ya probado</div>
+      </div>
+    </div>
+
+    <!-- MEDICAL -->
+    <div class="case-study active" id="cs-medical">
+      <div class="case-card">
+        <div class="case-tag">Médico / Clínica</div>
+        <div class="case-name">Caribbean Shoulder &amp; Elbow Institute</div>
+        <div class="case-location">Dr. José Rodríguez — Cirujano Ortopédico</div>
+        <div class="case-big-stat">2x</div>
+        <div class="case-big-label">Llamadas diarias — De 45-60 a 90-100 por día — $0 en publicidad</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">+4,645%</span><span class="case-metric-label">Vistas Instagram</span></div>
+          <div class="case-metric"><span class="case-metric-num">+30,400%</span><span class="case-metric-label">Interacciones</span></div>
+          <div class="case-metric"><span class="case-metric-num">1,180</span><span class="case-metric-label">Nuevos seguidores</span></div>
+        </div>
+        <div class="case-strategy">Estrategia: Doctor en cámara educando a su audiencia + "Agenda tu cita" con número directo en pantalla</div>
+      </div>
+    </div>
+
+    <!-- PHARMACY -->
+    <div class="case-study" id="cs-pharmacy">
+      <div class="case-card">
+        <div class="case-tag">Farmacia / Salud</div>
+        <div class="case-name">Farmacia Buena Vida</div>
+        <div class="case-location">Puerto Rico</div>
+        <div class="case-big-stat">815,150</div>
+        <div class="case-big-label">Vistas Orgánicas — 14 videos — Sin publicidad pagada</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">485,000</span><span class="case-metric-label">Video más visto</span></div>
+          <div class="case-metric"><span class="case-metric-num">14</span><span class="case-metric-label">Videos publicados</span></div>
+          <div class="case-metric"><span class="case-metric-num">$0</span><span class="case-metric-label">En publicidad pagada</span></div>
+        </div>
+        <div class="case-strategy">Estrategia: Contenido educativo de salud + personalidad de la farmacia en cámara</div>
+      </div>
+    </div>
+
+    <!-- RENOVATION -->
+    <div class="case-study" id="cs-renovation">
+      <div class="case-card">
+        <div class="case-tag">Remodelación / Construcción</div>
+        <div class="case-name">Empresa de Remodelaciones</div>
+        <div class="case-location">Puerto Rico</div>
+        <div class="case-big-stat">221,900</div>
+        <div class="case-big-label">Vistas — Alcance casi duplicado (+99.7%)</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">+524%</span><span class="case-metric-label">Interacciones</span></div>
+          <div class="case-metric"><span class="case-metric-num">+178%</span><span class="case-metric-label">Nuevos seguidores</span></div>
+          <div class="case-metric"><span class="case-metric-num">Llamadas</span><span class="case-metric-label">Migración a leads directos</span></div>
+        </div>
+        <div class="case-strategy">Estrategia: Propietario mostrando el proceso real — transparencia que genera confianza y leads de calidad</div>
+      </div>
+    </div>
+
+    <!-- SPORTS CLUB -->
+    <div class="case-study" id="cs-sports">
+      <div class="case-card">
+        <div class="case-tag">Club Deportivo</div>
+        <div class="case-name">Arsenal Volleyball Club</div>
+        <div class="case-location">Puerto Rico</div>
+        <div class="case-big-stat">16 → 35</div>
+        <div class="case-big-label">Equipos — El club se duplicó en 3 meses</div>
+        <div class="case-grid">
+          <div class="case-metric"><span class="case-metric-num">3 meses</span><span class="case-metric-label">Para doblar el tamaño</span></div>
+          <div class="case-metric"><span class="case-metric-num">Millones</span><span class="case-metric-label">De vistas orgánicas</span></div>
+          <div class="case-metric"><span class="case-metric-num">$0</span><span class="case-metric-label">En publicidad pagada</span></div>
+        </div>
+        <div class="case-strategy">Estrategia: Mostrar la realidad del club — jugadas, logros, jugadores, competencias</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer" style="border-top-color: rgba(255,255,255,0.1);">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential" style="color: rgba(255,255,255,0.2);">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 8: WALL OF RESULTS
+  ============================================================ -->
+<div class="page dark-page">
+  <div class="page-header" style="background: #111; border-bottom-color: var(--gold);">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client" style="color: rgba(255,255,255,0.3);">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">Nuestros Resultados</div>
+    <h2 class="page-title">+40 clientes.<br><span class="gold">11 industrias. Resultados comprobados.</span></h2>
+    <div class="gold-bar"></div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.12in; margin-top: 0.1in;">
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Media / Radio</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">Magic 97.3 FM</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">~10M</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Vistas Q1 2026</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Automotriz</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">Restauco</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">2.1M</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Vistas en 31 días</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Restaurante</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">Casita Vieja</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">1.2M</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Vistas + 96 leads directos</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Food & Beverage</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">El Truco de Güin</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">1.8M</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Vistas + 2,600% seguidores</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Médico / Clínica</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">Dr. Rodríguez</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">2x</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Llamadas diarias duplicadas</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Tienda Deportiva</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">Rp Sports</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">+35%</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Incremento en ventas</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Airbnb / Turismo</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">VSS Properties</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">+20%</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Margen de ganancias anual</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Bienes Raíces</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">AA Real Estate</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">$0</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Apartamento rentado sin ads</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Club Deportivo</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">Arsenal Volleyball</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">16→35</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Equipos en 3 meses</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Farmacia / Salud</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">Farmacia Buena Vida</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">815K</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Vistas orgánicas</div>
+      </div>
+
+      <div style="background: #1a1a1a; border-radius: 8px; padding: 0.18in; border-top: 2px solid var(--gold);">
+        <div style="font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px;">Remodelación</div>
+        <div style="font-size: 9pt; font-weight: 800; color: white; margin-bottom: 6px;">Remodelaciones</div>
+        <div style="font-size: 18pt; font-weight: 900; color: var(--gold); line-height: 1;">+524%</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.5); margin-top: 2px;">Interacciones de contenido</div>
+      </div>
+
+      <!-- CLOSING STATEMENT CARD -->
+      <div style="background: var(--gold); border-radius: 8px; padding: 0.18in; display: flex; flex-direction: column; justify-content: center;">
+        <div style="font-size: 11pt; font-weight: 900; color: var(--black); line-height: 1.3;">Todo esto con contenido orgánico.</div>
+        <div style="font-size: 8pt; font-weight: 600; color: rgba(0,0,0,0.6); margin-top: 6px;">Sin gastar fortunas en publicidad.</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="page-footer" style="border-top-color: rgba(255,255,255,0.1);">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential" style="color: rgba(255,255,255,0.2);">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 8: HOW IT WORKS
+  ============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">El Proceso</div>
+    <h2 class="page-title">Cómo lo<br><span class="gold">hacemos.</span></h2>
+    <div class="gold-bar"></div>
+
+    <div class="process-list">
+      <div class="process-item">
+        <div class="process-num">1</div>
+        <div>
+          <h3>Onboarding</h3>
+          <p>Conocemos ambos laboratorios a fondo — su visión, su paciente ideal, su competencia y lo que los hace únicos.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">2</div>
+        <div>
+          <h3>Research de Mercado</h3>
+          <p>Investigamos su industria, su competencia y las palabras clave que sus pacientes usan para encontrarlos en Google, Facebook e Instagram.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">3</div>
+        <div>
+          <h3>Estrategia de Contenido</h3>
+          <p>Creamos un plan de contenido para cada laboratorio — cada pieza tiene una intención: alcance, ventas, educación o reconocimiento.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">4</div>
+        <div>
+          <h3>Grabación en Sus Laboratorios</h3>
+          <p>Vamos a sus laboratorios. Filmamos. Ustedes solo aparecen — nosotros nos encargamos de todo lo demás.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">5</div>
+        <div>
+          <h3>Edición y Publicación</h3>
+          <p>Producimos, editamos y publicamos en Facebook, Instagram y TikTok de acuerdo al calendario estratégico.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">6</div>
+        <div>
+          <h3>Optimización y Escala</h3>
+          <p>Medimos qué funciona. El contenido orgánico que genera resultados lo convertimos en campañas de Meta Ads para amplificar el alcance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 9: SERVICES INCLUDED
+  ============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">Lo Que Incluye</div>
+    <h2 class="page-title">Todo esto está<br><span class="gold">incluido en su plan.</span></h2>
+    <div class="gold-bar"></div>
+
+    <div class="services-grid">
+      <div class="service-item">Optimización SEO de perfiles</div>
+      <div class="service-item">Investigación de mercado</div>
+      <div class="service-item">Estrategia de contenido personalizada</div>
+      <div class="service-item">Ideas y guiones de videos</div>
+      <div class="service-item">Grabación en ambos laboratorios</div>
+      <div class="service-item">Edición profesional de videos</div>
+      <div class="service-item">Publicación en Facebook</div>
+      <div class="service-item">Publicación en Instagram</div>
+      <div class="service-item">Publicación en TikTok</div>
+      <div class="service-item">Holiday content (días festivos)</div>
+      <div class="service-item">Artes y fotos promocionales</div>
+      <div class="service-item">Colaboración El Vivi ↔ Arecibo Lab</div>
+      <div class="service-item">Meta Ads incluido</div>
+    </div>
+
+    <div class="services-note">
+      <strong>Lo único que cambia entre planes es el volumen de Reels por cuenta.</strong><br>
+      Todos los servicios aplican a los tres planes — y a los dos laboratorios.
+    </div>
+
+    <div class="divider"></div>
+    <p class="body-text" style="text-align: center; font-size: 9.5pt;">
+      Contamos con un equipo de 5 personas dedicadas a sus dos cuentas.<br>
+      <strong>Distribuimos contenido Lunes &amp; Miércoles o Martes &amp; Jueves</strong> para mantener presencia constante toda la semana.
+    </p>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 10: THE OFFER — TIERS
+  ============================================================ -->
+<div class="page dark-page">
+  <div class="page-header" style="background: #111; border-bottom-color: var(--gold);">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client" style="color: rgba(255,255,255,0.3);">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">Los Planes</div>
+    <h2 class="page-title">Elijan su nivel<br><span class="gold">de crecimiento.</span></h2>
+    <div class="gold-bar"></div>
+
+    <div class="tiers-grid">
+
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-name">Lanzamiento</span>
+          <span class="tier-tagline">Para poner ambos labs en el mapa</span>
+        </div>
+        <div class="tier-body">
+          <div class="tier-price">$750<span class="per">/mes</span></div>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li><strong>1 Reel semanal por cuenta</strong></li>
+            <li><strong>2 Artes semanales</strong> por cuenta</li>
+            <li>8 Reels + 16 artes al mes en total</li>
+            <li>Publicación en FB, IG y TikTok</li>
+            <li>Optimización de perfiles (SEO)</li>
+            <li>Estrategia por laboratorio</li>
+            <li><strong>Meta Ads incluido</strong></li>
+            <li>Holiday content</li>
+            <li>Onboarding sin costo</li>
+          </ul>
+          <div class="tier-commitment">Compromiso: 3-6 meses</div>
+        </div>
+      </div>
+
+      <div class="tier-card recommended">
+        <div class="tier-recommended-badge">⭐ Recomendado</div>
+        <div class="tier-header">
+          <span class="tier-name">Crecimiento</span>
+          <span class="tier-tagline">Para ganar terreno en la región</span>
+        </div>
+        <div class="tier-body">
+          <div class="tier-price">$900<span class="per">/mes</span></div>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li><strong>2 Reels semanales por cuenta</strong></li>
+            <li><strong>2 Artes semanales</strong> por cuenta</li>
+            <li>16 Reels + 16 artes al mes en total</li>
+            <li>Publicación en FB, IG y TikTok</li>
+            <li>Optimización de perfiles (SEO)</li>
+            <li>Estrategia por laboratorio</li>
+            <li><strong>Meta Ads incluido</strong></li>
+            <li>Holiday content</li>
+            <li>Onboarding sin costo</li>
+          </ul>
+          <div class="tier-commitment">Compromiso: 3-6 meses</div>
+        </div>
+      </div>
+
+      <div class="tier-card">
+        <div class="tier-header">
+          <span class="tier-name">Autoridad</span>
+          <span class="tier-tagline">Para dominar el mercado del área</span>
+        </div>
+        <div class="tier-body">
+          <div class="tier-price">$1,200<span class="per">/mes</span></div>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li><strong>3 Reels semanales por cuenta</strong></li>
+            <li><strong>2 Artes semanales</strong> por cuenta</li>
+            <li>24 Reels + 16 artes al mes en total</li>
+            <li>Publicación en FB, IG y TikTok</li>
+            <li>Optimización de perfiles (SEO)</li>
+            <li>Estrategia por laboratorio</li>
+            <li><strong>Meta Ads incluido</strong></li>
+            <li>Holiday content</li>
+            <li>Onboarding sin costo</li>
+          </ul>
+          <div class="tier-commitment">Compromiso: 3-6 meses</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TWO ACCOUNTS + NO SETUP FEE -->
+    <div style="margin-top: 0.18in; background: rgba(255,191,0,0.07); border: 1px solid rgba(255,191,0,0.25); border-radius: 8px; padding: 0.18in 0.25in; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div style="font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 4px;">Dos cuentas · Un solo precio</div>
+        <div style="font-size: 9.5pt; color: rgba(255,255,255,0.7); line-height: 1.5;">Todos los precios cubren <strong style="color:#fff;">El Vivi y Arecibo Lab</strong> — contenido, estrategia y publicación independientes para cada laboratorio. Meta Ads incluido en todos los planes.</div>
+      </div>
+      <div style="text-align: center; flex-shrink: 0; margin-left: 0.25in;">
+        <div style="font-size: 22pt; font-weight: 900; color: var(--gold); line-height: 1;">$0</div>
+        <div style="font-size: 7.5pt; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px;">Iniciación</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="page-footer" style="border-top-color: rgba(255,255,255,0.1);">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential" style="color: rgba(255,255,255,0.2);">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 11: META ADS (INCLUDED)
+  ============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">Incluido en su plan</div>
+    <h2 class="page-title">Meta Ads,<br><span class="gold">sin costo adicional.</span></h2>
+    <div class="gold-bar"></div>
+    <p class="body-text">La mayoría de agencias cobran el manejo de Meta Ads aparte. Nosotros lo incluimos en los tres planes — porque en un mercado con tanta competencia como el de Arecibo y Utuado, el orgánico solo no alcanza para ganar terreno rápido.</p>
+
+    <div class="addon-box">
+      <div class="addon-price-circle">
+        <span class="addon-price-num">$0</span>
+        <span class="addon-price-label">Incluido</span>
+      </div>
+      <div class="addon-text">
+        <h3>Manejo de Meta Ads — incluido</h3>
+        <p>Estrategia, creación, optimización y seguimiento de campañas en Facebook e Instagram para <strong>ambos laboratorios</strong>. El presupuesto publicitario es inversión directa de ustedes y se paga a Meta — nosotros no cobramos por manejarlo.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <ul class="checklist">
+      <li><span class="icon">✅</span><span><strong>Orgánico primero</strong> — Solo escalamos con ads el contenido que ya demostró funcionar</span></li>
+      <li><span class="icon">✅</span><span><strong>Cada dólar cuenta</strong> — No quemamos presupuesto probando — ya tenemos los datos</span></li>
+      <li><span class="icon">✅</span><span><strong>Segmentación por pueblo</strong> — Campañas separadas para Arecibo y para Utuado, cada una a su propia audiencia</span></li>
+      <li><span class="icon">✅</span><span><strong>Audiencia probada</strong> — El contenido orgánico nos dice exactamente a quién targetear</span></li>
+    </ul>
+
+    <p class="body-text" style="margin-top: 0.15in; font-size: 9pt; color: var(--gray);">
+      El presupuesto de Meta Ads es inversión directa del cliente y no está incluido en la tarifa mensual. Recomendamos comenzar con $150-$300 al mes por laboratorio.
+    </p>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 12: ROI FRAME
+  ============================================================ -->
+<div class="page">
+  <div class="page-header">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content">
+    <div class="section-label">El Retorno</div>
+    <h2 class="page-title">¿Cuánto vale<br><span class="gold">esto realmente?</span></h2>
+    <div class="gold-bar"></div>
+    <p class="body-text">Nuestros clientes no nos ven como un gasto. Nos ven como su empleado más productivo — trabajando 24/7 atrayendo clientes nuevos.</p>
+
+    <div class="roi-grid">
+      <div class="roi-card">
+        <span class="roi-stat">+35%</span>
+        <span class="roi-client">Rp Sports</span>
+        <div class="roi-desc">Incremento en ventas — tienda especializada en Voleibol</div>
+      </div>
+      <div class="roi-card">
+        <span class="roi-stat">2x</span>
+        <span class="roi-client">Dr. Rodríguez</span>
+        <div class="roi-desc">Llamadas duplicadas — de 45-60 a 90-100 por día, sin ads</div>
+      </div>
+      <div class="roi-card">
+        <span class="roi-stat">+15-20%</span>
+        <span class="roi-client">VSS Properties</span>
+        <div class="roi-desc">Incremento en margen de ganancias anual por reservas directas</div>
+      </div>
+    </div>
+
+    <div class="roi-conclusion">
+      <p>Estos no son proyecciones ni promesas.<br>
+      Son <strong>resultados reales que ya logramos</strong> para negocios en Puerto Rico — negocios como los de ustedes.<br>
+      <strong style="color: var(--gold);">Lo hicimos para ellos. Podemos hacerlo para ustedes.</strong></p>
+    </div>
+
+    <p class="body-text" style="text-align: center; margin-top: 0.15in; font-size: 9.5pt; font-weight: 600;">
+      Más de <span style="color: var(--gold);">40 clientes. 11 industrias. Resultados comprobados.</span>
+    </p>
+  </div>
+  <div class="page-footer">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential">Confidencial</span>
+  </div>
+</div>
+
+
+<!-- ============================================================
+  PAGE 13: NEXT STEPS / CTA
+  ============================================================ -->
+<div class="page dark-page">
+  <div class="page-header" style="background: #111; border-bottom-color: var(--gold);">
+    <img src="logo.jpg" alt="Nate Media">
+    <span class="header-client" style="color: rgba(255,255,255,0.3);">El Vivi &amp; Arecibo Lab</span>
+  </div>
+  <div class="page-content" style="justify-content: center;">
+    <div class="section-label">Próximos Pasos</div>
+    <h2 class="page-title">Empecemos<br><span class="gold">hoy.</span></h2>
+    <div class="gold-bar"></div>
+
+    <ol class="cta-steps">
+      <li class="cta-step">
+        <div class="cta-num">1</div>
+        <p><strong>Seleccionen su plan</strong> — Lanzamiento, Crecimiento o Autoridad</p>
+      </li>
+      <li class="cta-step">
+        <div class="cta-num">2</div>
+        <p><strong>Llamen a Nathan</strong> para confirmar su selección e iniciar el proceso</p>
+      </li>
+      <li class="cta-step">
+        <div class="cta-num">3</div>
+        <p><strong>Onboarding</strong> — Nos sumergimos en ambos laboratorios, su visión y sus metas</p>
+      </li>
+      <li class="cta-step">
+        <div class="cta-num">4</div>
+        <p><strong>Firmamos el acuerdo</strong> entre empresas</p>
+      </li>
+      <li class="cta-step">
+        <div class="cta-num">5</div>
+        <p><strong>Agendamos su primera grabación</strong> — vamos a Arecibo y a Utuado</p>
+      </li>
+      <li class="cta-step">
+        <div class="cta-num">6</div>
+        <p><strong>Comenzamos a atraer pacientes nuevos</strong> para ambos laboratorios</p>
+      </li>
+    </ol>
+
+    <div class="contact-block">
+      <div class="contact-sign-off">Espero su llamada,</div>
+      <div class="contact-name">Nathan D. Torres Soto</div>
+      <div class="contact-title">MBA · CEO &amp; Founder · Nate Media</div>
+      <div class="contact-row">
+        <div class="contact-item">
+          <span>Teléfono</span>
+          <p>939-292-3934</p>
+        </div>
+        <div class="contact-item">
+          <span>Email</span>
+          <p>Nathantorres@natemediapr.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer" style="border-top-color: rgba(255,255,255,0.1);">
+    <span class="footer-brand">Nate Media</span>
+    <span class="footer-confidential" style="color: rgba(255,255,255,0.2);">Confidencial</span>
+  </div>
+</div>
+
+<!-- ============================================================
+  PRINT BUTTON (hidden when printing)
+  ============================================================ -->
+<div class="no-print" style="text-align: center; padding: 0.5in; font-family: 'Montserrat', sans-serif;">
+  <button onclick="activateCaseStudy()" style="background: #ffbf00; color: black; border: none; padding: 12px 30px; font-size: 12pt; font-weight: 700; border-radius: 6px; cursor: pointer; margin-right: 10px;">
+    Ver Propuesta Completa
+  </button>
+  <button onclick="window.print()" style="background: #000; color: white; border: none; padding: 12px 30px; font-size: 12pt; font-weight: 700; border-radius: 6px; cursor: pointer;">
+    Exportar PDF
+  </button>
+</div>
+
+<script>
+// To show a specific case study, call showCaseStudy('cs-restaurant') etc.
+// Available IDs: cs-automotive, cs-restaurant, cs-food, cs-realestate,
+//                cs-airbnb, cs-retail, cs-medical, cs-pharmacy,
+//                cs-renovation, cs-sports
+
+function showCaseStudy(id) {
+  // Hide all
+  document.querySelectorAll('.case-study').forEach(el => el.classList.remove('active'));
+  // Show selected
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+}
+
+// Default for this proposal: medical / clinical lab
+document.addEventListener('DOMContentLoaded', function() {
+  showCaseStudy('cs-medical');
+});
+
+function activateCaseStudy() {
+  const id = prompt("Industria del cliente:\nautomotive / restaurant / food / realestate /\nairbnb / retail / medical / pharmacy / renovation / sports");
+  if (id) showCaseStudy('cs-' + id.toLowerCase().trim());
+}
+</script>
+
+</body>
+</html>
